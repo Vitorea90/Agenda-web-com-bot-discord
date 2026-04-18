@@ -1,0 +1,76 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Outfit', sans-serif;
+    color: #2d3436;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.card {
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
+}
+
+.btn-primary {
+    background-color: #6c5ce7;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #5b4cc4;
+}
+
+.badge {
+    padding: 8px 12px;
+    border-radius: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-in { animation: fadeIn 0.8s ease forwards; }
+.animate-in-left { animation: fadeInLeft 0.8s ease forwards; }
+.animate-in-right { animation: fadeInRight 0.8s ease forwards; }
+
+.table thead th {
+    border-top: none;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    color: #636e72;
+}
+
+/* Form Styles */
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #dfe6e9;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+    border-color: #6c5ce7;
+}
