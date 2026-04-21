@@ -1,77 +1,66 @@
-# 📅 Agenda Web Pro + Bot Discord
+# 📅 Agenda Web + Bot Discord (MVC)
 
-Um sistema de agenda completo e responsivo desenvolvido em Python, utilizando **Flask** para a interface web e **discord.py** para notificações automáticas em tempo real.
+Este projeto é um sistema de gerenciamento de tarefas que integra uma interface web Flask com notificações automáticas via Discord. A aplicação foi estruturada seguindo o padrão **MVC (Model-View-Controller)** para garantir modularidade e facilidade de manutenção.
 
-O projeto segue a arquitetura **MVC (Model-View-Controller)** para manter o código limpo, organizado e "humano".
+## 🛠️ Tecnologias e Arquitetura
 
-## 🚀 Funcionalidades
+- **Backend**: Python 3.10+ (Flask como servidor web).
+- **Notificações**: Discord.py (Bot assíncrono).
+- **Banco de Dados**: Persistência em arquivos JSON com proteção de `threading.Lock`.
+- **Frontend**: HTML5, CSS3 e Bootstrap 5 para um design responsivo.
+- **Logs**: Sistema de logging centralizado salvando em `app.log`.
 
-- **Interface Web Premium**: Layout responsivo com Bootstrap 5, animações e design moderno.
-- **Gestão de Tarefas**: CRUD completo (Adicionar, Listar, Concluir e Remover).
-- **Notificações Inteligentes**: O Bot do Discord verifica as tarefas e envia um lembrete automático **5 minutos antes** do horário previsto.
-- **Comandos no Discord**: Use `!tarefas` no seu servidor para ver o que está pendente diretamente pelo chat.
-- **Persistência em JSON**: Dados salvos localmente de forma segura.
-
-## 🛠️ Tecnologias Utilizadas
-
-- **Backend**: Python 3.10+
-- **Framework Web**: Flask
-- **Integração Discord**: discord.py
-- **Frontend**: HTML5, CSS3, JavaScript (Bootstrap 5 & Bootstrap Icons)
-- **Configuração**: python-dotenv
-
-## 📦 Como Instalar
-
-1.  **Clone o repositório** ou baixe os arquivos.
-2.  **Crie um ambiente virtual** (opcional, mas recomendado):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # No Windows: venv\Scripts\activate
-    ```
-3.  **Instale as dependências**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-## ⚙️ Configuração do Discord
-
-Para que as notificações funcionem, você precisa de um Bot no Discord:
-
-1.  Acesse o [Discord Developer Portal](https://discord.com/developers/applications).
-2.  Crie uma nova aplicação e, na aba **Bot**, gere um **Token**.
-3.  Ative a opção **Message Content Intent** nas configurações do Bot.
-4.  Convide o Bot para o seu servidor com permissões de enviar mensagens e embeds.
-5.  Copie o **ID do canal** onde deseja receber as notificações (clique com o botão direito no canal -> Copiar ID).
-6.  Renomeie o arquivo `.env.example` para `.env` e preencha com suas credenciais:
-    ```env
-    DISCORD_TOKEN=seu_token_aqui
-    DISCORD_CHANNEL_ID=seu_id_do_canal
-    ```
-
-## ▶️ Como Executar
-
-Simplesmente execute o arquivo principal:
-
-```bash
-python run.py
-```
-
-- A interface web estará disponível em: `http://localhost:5000`
-- O Bot do Discord iniciará simultaneamente no seu servidor.
-
-## 📁 Estrutura do Projeto (MVC)
+## 📁 Estrutura do Repositório
 
 ```text
 agenda_discord/
 ├── app/
-│   ├── controllers/    # Lógica de rotas (Flask)
-│   ├── models/         # Manipulação de dados (JSON)
-│   ├── static/         # CSS e assets visuais
-│   ├── templates/      # Views HTML (Jinja2)
-│   └── __init__.py     # Inicialização do App
-├── bot/                # Lógica do Bot do Discord
-├── data/               # Armazenamento (tasks.json)
-├── run.py              # Arquivo de entrada principal
-├── requirements.txt    # Dependências
-└── README.md           # Documentação
+│   ├── controllers/    # Processamento de rotas e lógica de negócio
+│   ├── models/         # Manipulação de dados e persistência
+│   ├── static/         # Arquivos estáticos (CSS/JS)
+│   ├── templates/      # Estruturas HTML (Jinja2)
+├── bot/                # Lógica de integração e loop do Discord
+├── data/               # Armazenamento físico (tasks.json)
+├── run.py              # Ponto de entrada (Flask em Thread + Bot)
+├── requirements.txt    # Dependências com versões fixas
+└── README.md           # Documentação técnica
 ```
+
+## 🚀 Instalação e Execução
+
+### 1. Preparação do Ambiente
+Recomenda-se o uso de um ambiente virtual:
+```bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
+```
+
+### 2. Instalação de Dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configuração de Variáveis (`.env`)
+Renomeie o arquivo `.env.example` para `.env` e preencha as credenciais do seu Bot do Discord:
+- `DISCORD_TOKEN`: Token gerado no Discord Developer Portal.
+- `DISCORD_CHANNEL_ID`: ID do canal de texto para notificações globais.
+- `DISCORD_USER_ID`: (Opcional) Seu ID de usuário para notificações via DM.
+
+### 4. Executando o Sistema
+```bash
+python run.py
+```
+O servidor web iniciará em `http://localhost:5000` e o bot se conectará simultaneamente.
+
+## 📋 Funcionalidades Técnicas
+- **CRUD Completo**: Adição, conclusão e remoção de tarefas via web.
+- **Check Inteligente**: O bot verifica tarefas no arquivo JSON a cada 60 segundos.
+- **Múltiplos Avisos**: Notificações configuráveis (7 dias, 24h, 5h, 1h e 10 min antes).
+- **Logs de Auditoria**: Atividades do sistema e erros são registrados tanto no console quanto em arquivo.
+
+## 📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
+
